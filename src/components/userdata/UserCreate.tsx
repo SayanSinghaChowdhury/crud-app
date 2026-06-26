@@ -3,24 +3,22 @@
 import { Button } from "../shadcnui/button";
 import {
   Card,
-  CardDescription,
+  CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "../shadcnui/card";
 
-const UserData = () => {
+const UserCreate = () => {
   return (
     <Card className="w-sm">
       <CardHeader>
-        <CardTitle className="text-center text-xl font-semibold">
-          BEN10
-        </CardTitle>
-
-        <CardDescription className="mt-5 text-center text-lg">
-          kevenelevenbentenisen@gmail.com
-        </CardDescription>
+        <CardTitle className="text-center text-xl font-semibold"></CardTitle>
       </CardHeader>
+
+      <CardContent className="grid place-items-center gap-7">
+        <form>hi</form>
+      </CardContent>
 
       <CardFooter className="grid grid-cols-2 place-items-center gap-2">
         <Button
@@ -39,4 +37,4 @@ const UserData = () => {
   );
 };
 
-export default UserData;
+export default UserCreate;
