@@ -1,6 +1,7 @@
 "use client";
 
-import { Button } from "../shadcnui/button";
+import Link from "next/link";
+import { buttonVariants } from "../shadcnui/button";
 import {
   Card,
   CardDescription,
@@ -11,6 +12,8 @@ import {
 import DeleteUser from "./DeleteUser";
 
 const UserData = () => {
+  const usid = "used";
+
   return (
     <Card className="w-sm">
       <CardHeader>
@@ -26,14 +29,20 @@ const UserData = () => {
       <CardFooter className="grid grid-cols-2 place-items-center gap-2">
         <DeleteUser />
 
-        <Button
-          className="w-full"
-          variant={"secondary"}>
-          Edit
-        </Button>
+        <Link
+          href={`/${usid}`}
+          className={buttonVariants({ variant: "secondary", size: "lg" })}>
+          Edit 📝
+        </Link>
       </CardFooter>
     </Card>
   );
 };
 
 export default UserData;
+
+// <Link
+//   className="w-full"
+//   variant={"secondary"}>
+//   Edit
+// </Link>;
