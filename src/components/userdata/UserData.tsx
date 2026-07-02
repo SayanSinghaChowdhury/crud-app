@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../shadcnui/card";
+import DeleteUser from "./DeleteUser";
 
 const UserData = () => {
   return (
@@ -23,11 +24,7 @@ const UserData = () => {
       </CardHeader>
 
       <CardFooter className="grid grid-cols-2 place-items-center gap-2">
-        <Button
-          className="w-full"
-          variant={"destructive"}>
-          Delet
-        </Button>
+        <DeleteUser />
 
         <Button
           className="w-full"
