@@ -24,7 +24,7 @@ const DeleteUser = () => {
       variant={"destructive"}>
       {remove ?
         <>
-          Deliting
+          Deleting
           <BrushCleaningIcon />
         </>
       : <>
