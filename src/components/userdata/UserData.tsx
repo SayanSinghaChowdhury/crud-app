@@ -12,7 +12,7 @@ import {
 import DeleteUser from "./DeleteUser";
 
 const UserData = () => {
-  const usid = "used";
+  const usid = "xyz";
 
   return (
     <Card className="w-sm">
