@@ -1,11 +1,14 @@
 "use client";
 
 import { userSchema, UserSchemaType } from "@/lib/schemaUser";
+import userCreateAction from "@/server/userCreateAction";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { BrushCleaningIcon, Send, Trash2Icon, UploadCloud } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { setTimeout } from "node:timers";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { Button } from "../shadcnui/button";
 import { CardContent, CardFooter } from "../shadcnui/card";
 import {
@@ -20,6 +23,8 @@ import { Textarea } from "../shadcnui/textarea";
 const UserCreate = () => {
   const [clear, setClear] = useState(false);
 
+  const { push } = useRouter();
+
   const {
     handleSubmit,
     control,
@@ -27,7 +32,7 @@ const UserCreate = () => {
     formState: { isSubmitting },
   } = useForm({
     resolver: zodResolver(userSchema),
-    defaultValues: { username: "", gmail: "", address: "" },
+    defaultValues: { username: "", email: "", address: "" },
 
     mode: "all",
   });
@@ -36,7 +41,15 @@ const UserCreate = () => {
     await new Promise((r) => {
       setTimeout(r, 1000);
     });
-    console.log(usData);
+    const { issuccess, message } = await userCreateAction(usData);
+
+    if (issuccess) {
+      toast.success(message);
+
+      push("/");
+    } else {
+      toast.error(message);
+    }
   };
 
   const HandleClear = async () => {
@@ -75,7 +88,7 @@ const UserCreate = () => {
           )}
         />
         <Controller
-          name="gmail"
+          name="email"
           control={control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>

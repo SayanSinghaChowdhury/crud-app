@@ -1,9 +1,11 @@
 "use client";
 
+import { UserMosel } from "@generated/prisma/client";
 import Link from "next/link";
 import { buttonVariants } from "../shadcnui/button";
 import {
   Card,
+  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -11,26 +13,34 @@ import {
 } from "../shadcnui/card";
 import DeleteUser from "./DeleteUser";
 
-const UserData = () => {
-  const usid = "xyz";
+type UserDataType = {
+  createData: UserMosel;
+};
+
+const UserData = ({
+  createData: { id, username, email, address },
+}: UserDataType) => {
+  const uid = "user";
 
   return (
-    <Card className="w-sm">
-      <CardHeader>
+    <Card className="grid w-sm place-items-center gap-7">
+      <CardHeader className="w-full">
         <CardTitle className="text-center text-xl font-semibold">
-          BEN10
+          {username}
         </CardTitle>
 
-        <CardDescription className="mt-5 text-center text-lg">
-          kevenelevenbentenisen@gmail.com
+        <CardDescription className="w-full text-center text-lg">
+          {email}
         </CardDescription>
       </CardHeader>
+
+      <CardContent>{address}</CardContent>
 
       <CardFooter className="grid grid-cols-2 place-items-center gap-2">
         <DeleteUser />
 
         <Link
-          href={`/${usid}`}
+          href={`/${id}`}
           className={buttonVariants({ variant: "secondary", size: "lg" })}>
           Edit 📝
         </Link>
