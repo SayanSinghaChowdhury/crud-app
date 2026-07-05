@@ -1,6 +1,7 @@
 import UserData from "@/components/userdata/UserData";
 import prisma from "@/lib/database/dbClient";
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "ALL-User Basic CRUD-app",
@@ -12,9 +13,14 @@ const page = async () => {
 
   if (userAll.length === 0) {
     return (
-      <section className="grid h-dvh place-items-center">
-        <h1>No student</h1>
-      </section>
+      <Link
+        href={"/create"}
+        className={`animate-drop-down grid h-dvh place-items-center delay-200`}>
+        <h1 className="animate-bounce font-sans text-2xl delay-300">
+          No users avalable
+          <span className="hover:text-5xl hover:duration-500">😭</span>
+        </h1>
+      </Link>
     );
   }
 

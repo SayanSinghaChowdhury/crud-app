@@ -9,8 +9,8 @@ export const userSchema = z.object({
 
   address: z
     .string({ error: "Address is required" })
-    .min(12, { error: "Address must be at least 12 characters long." })
-    .max(200, { error: "Address must be at least 20 characters long." }),
+    .min(10, { error: "Address must be at least 12 characters long." })
+    .max(100, { error: "Address must be at least 20 characters long." }),
 });
 
 export type UserSchemaType = z.infer<typeof userSchema>;

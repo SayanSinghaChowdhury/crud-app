@@ -20,8 +20,6 @@ type UserDataType = {
 const UserData = ({
   createData: { id, username, email, address },
 }: UserDataType) => {
-  const uid = "user";
-
   return (
     <Card className="grid w-sm place-items-center gap-7">
       <CardHeader className="w-full">
@@ -34,10 +32,11 @@ const UserData = ({
         </CardDescription>
       </CardHeader>
 
-      <CardContent>{address}</CardContent>
+      <CardContent className="">{address}</CardContent>
 
       <CardFooter className="grid grid-cols-2 place-items-center gap-2">
-        <DeleteUser />
+        {/* pass the data through props the unique id for the catch th user data for delet */}
+        <DeleteUser usDelete={id} />
 
         <Link
           href={`/${id}`}
