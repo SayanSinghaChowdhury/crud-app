@@ -9,14 +9,15 @@ const Header = () => {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
         <Link href={"/"}>
           <h1
-            className="text-2xl font-semibold"
+            className="text-2xl font-bold"
             aria-label="App Name">
-            NSF App
+            CRUD App
           </h1>
         </Link>
 
         <nav className="flex items-center gap-4">
-          <Link href={"/"}>Home</Link>
+          {/* <Link href={"/"}>Home</Link> */}
+          <Link href={"/create"}>Create</Link>
 
           <ThemeToggleButton />
         </nav>

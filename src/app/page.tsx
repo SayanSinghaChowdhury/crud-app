@@ -1,22 +1,37 @@
-import ToastButton from "@/components/Buttons/ToastButton";
+import UserData from "@/components/userdata/UserData";
+import prisma from "@/lib/database/dbClient";
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Next.js Starter Fullstack",
-  description: "Production grade Fullstack Next.js starter template",
+  title: "ALL-User Basic CRUD-app",
+  description: "ALL-User Basic CRUD-app for user data",
 };
 
-const page = () => {
-  return (
-    <section className="grid h-dvh place-items-center">
-      <div className="space-y-4 text-center">
-        <h1 className="text-5xl font-semibold">Next.js Starter Fullstack</h1>
-        <h2 className="text-3xl">
-          Production grade Fullstack Next.js starter template
-        </h2>
+const page = async () => {
+  const userAll = await prisma.userMosel.findMany();
 
-        <ToastButton />
-      </div>
+  if (userAll.length === 0) {
+    return (
+      <Link
+        href={"/create"}
+        className={`animate-drop-down grid h-dvh place-items-center delay-200`}>
+        <h1 className="animate-bounce font-sans text-2xl delay-300">
+          No users avalable
+          <span className="hover:text-5xl hover:duration-500">😭</span>
+        </h1>
+      </Link>
+    );
+  }
+
+  return (
+    <section className="grid grid-cols-1 place-items-center gap-10 pt-24 pb-14 md:grid-cols-2 lg:grid-cols-3">
+      {userAll.map((cdata) => (
+        <UserData
+          key={cdata.id}
+          createData={cdata}
+        />
+      ))}
     </section>
   );
 };

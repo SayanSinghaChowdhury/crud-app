@@ -130,4 +130,20 @@
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }
+
+  @keyframes drop-down {
+    from {
+      opacity: 0;
+      transform: translateY(-40rem);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-drop-down {
+    animation: drop-down 0.5s ease-out forwards;
+  }
 }
