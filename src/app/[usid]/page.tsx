@@ -1,14 +1,18 @@
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "ALL-User Basic CRUD-app",
-  description: "ALL-User Edit-(CRUD-app for user data)",
-};
+import { Card, CardHeader, CardTitle } from "@/components/shadcnui/card";
+import EditorUser from "@/components/userdata/EditorUser";
 
 const page = () => {
   return (
     <section className="grid h-dvh place-items-center">
-      <h1>No student</h1>
+      <Card className="grid w-sm place-items-center">
+        <CardHeader className="w-full">
+          <CardTitle className="text-center font-mono text-2xl font-stretch-50%">
+            User Edits Zone
+          </CardTitle>
+        </CardHeader>
+
+        <EditorUser />
+      </Card>
     </section>
   );
 };
