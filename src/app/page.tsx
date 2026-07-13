@@ -25,7 +25,7 @@ const page = async () => {
   }
 
   return (
-    <section className="grid grid-cols-1 place-items-center gap-10 pt-24 pb-14 md:grid-cols-2 lg:grid-cols-3">
+    <section className="grid grid-cols-1 place-items-center gap-30 pt-24 pb-14 md:grid-cols-2 lg:grid-cols-3">
       {userAll.map((cdata) => (
         <UserData
           key={cdata.id}
