@@ -16,6 +16,7 @@ const page = () => {
             User Create Zone
           </CardTitle>
         </CardHeader>
+
         <UserCreate />
       </Card>
     </section>
