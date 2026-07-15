@@ -4,9 +4,9 @@ import prisma from "@/lib/database/dbClient";
 import { UserSchemaType } from "@/lib/schemaUser";
 import { revalidatePath } from "next/cache";
 
-const userCreateAction = async (usData: UserSchemaType) => {
+const userUpdateAction = async (id: string, newData: UserSchemaType) => {
   try {
-    await prisma.userMosel.updateMany({ data: usData });
+    await prisma.userMosel.update({ where: { id }, data: newData });
 
     //   for main page or read page data refresh one time when new user login or create.
 
@@ -28,4 +28,4 @@ const userCreateAction = async (usData: UserSchemaType) => {
   }
 };
 
-export default userCreateAction;
+export default userUpdateAction;

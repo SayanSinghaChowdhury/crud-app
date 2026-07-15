@@ -1,7 +1,7 @@
 "use client";
 
 import { userSchema, UserSchemaType } from "@/lib/schemaUser";
-import userCreateAction from "@/server/userCreateAction";
+import userUpdateAction from "@/server/userEditingAction";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Send, UploadCloud } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
@@ -17,7 +17,11 @@ import {
 import { Input } from "../shadcnui/input";
 import { Textarea } from "../shadcnui/textarea";
 
-const EditorUser = () => {
+type UserDataType = {
+  editDelete: string;
+};
+
+const EditorUser = ({ editDelete }: UserDataType) => {
   const {
     handleSubmit,
     control,
@@ -30,17 +34,18 @@ const EditorUser = () => {
     mode: "all",
   });
 
-  const userEditHandelar = async (usData: UserSchemaType) => {
-    await new Promise((r) => {
-      setTimeout(r, 1000);
-    });
-    const { issuccess, message } = await userCreateAction(usData);
+  const userEditHandelar = async (data: UserSchemaType) => {
+    const { issuccess, message } = await userUpdateAction(editDelete, data);
 
     if (issuccess) {
       toast.success(message);
     } else {
       toast.error(message);
     }
+
+    await new Promise((r) => {
+      setTimeout(r, 1000);
+    });
   };
 
   return (
@@ -68,6 +73,7 @@ const EditorUser = () => {
             </Field>
           )}
         />
+
         <Controller
           name="email"
           control={control}
@@ -113,23 +119,6 @@ const EditorUser = () => {
       </CardContent>
 
       <CardFooter className="grid place-items-center gap-3">
-        {/* <Button
-          type="reset"
-          onClick={HandleClear}
-          className="w-full"
-          variant={"destructive"}>
-          {clear ?
-            <>
-              Reseting...
-              <BrushCleaningIcon />
-            </>
-          : <>
-              Reset
-              <Trash2Icon />
-            </>
-          }
-        </Button> */}
-
         <Button
           type="submit"
           className="w-full"

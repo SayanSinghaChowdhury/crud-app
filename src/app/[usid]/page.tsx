@@ -1,7 +1,13 @@
 import { Card, CardHeader, CardTitle } from "@/components/shadcnui/card";
 import EditorUser from "@/components/userdata/EditorUser";
 
-const page = () => {
+type PageProps = {
+  params: Promise<{
+    id: string;
+  }>;
+};
+const page = async ({ params }: PageProps) => {
+  const { id } = await params;
   return (
     <section className="grid h-dvh place-items-center">
       <Card className="grid w-sm place-items-center">
@@ -11,7 +17,7 @@ const page = () => {
           </CardTitle>
         </CardHeader>
 
-        <EditorUser />
+        <EditorUser editDelete={id} />
       </Card>
     </section>
   );
