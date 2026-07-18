@@ -23,9 +23,7 @@ type UserDataType = {
   editDelete: UserMosel;
 };
 
-const EditorUser = ({
-  editDelete: { id, address, email, username },
-}: UserDataType) => {
+const EditorUser = ({ editDelete: { id } }: UserDataType) => {
   const {
     handleSubmit,
     control,
@@ -33,7 +31,7 @@ const EditorUser = ({
     formState: { isSubmitting },
   } = useForm({
     resolver: zodResolver(userSchema),
-    defaultValues: { username: username, email: email, address: address },
+    defaultValues: { username: "", email: "", address: "" },
 
     mode: "all",
   });
@@ -69,6 +67,7 @@ const EditorUser = ({
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor={field.name}>User Name</FieldLabel>
               <Input
+                className="bg-project text-project"
                 {...field}
                 id={field.name}
                 type="text"
@@ -90,6 +89,7 @@ const EditorUser = ({
               <FieldLabel htmlFor={field.name}>User Email</FieldLabel>
               <Input
                 {...field}
+                className="bg-project text-project"
                 id={field.name}
                 type="email"
                 placeholder="Enter your Email"
@@ -109,7 +109,7 @@ const EditorUser = ({
               <FieldLabel htmlFor={field.name}>User Adress</FieldLabel>
 
               <Textarea
-                className="pb-20"
+                className="bg-project text-project pb-20"
                 {...field}
                 id={field.name}
                 aria-invalid={fieldState.invalid}

@@ -1,6 +1,7 @@
 "use client";
 
 import { UserMosel } from "@generated/prisma/client";
+import { Edit2Icon, HouseIcon } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "../shadcnui/button";
 import {
@@ -27,13 +28,16 @@ const UserData = ({
           {username}
         </CardTitle>
 
-        <CardDescription className="mt-3 w-full text-center text-lg">
+        <CardDescription className="w-xs rounded-lg px-7 py-7 text-center font-mono wrap-break-word font-stretch-50%">
           {email}
         </CardDescription>
       </CardHeader>
 
       <CardContent className="grid w-full place-items-center gap-3.5 pb-3">
-        <h1 className="text-lg">Address 🏡:</h1>
+        <h1 className="flex place-items-center gap-1.5 text-lg">
+          Adress:
+          <HouseIcon />
+        </h1>
         <p className="w-2xs rounded-lg bg-gray-400/10 px-7 py-7 text-center font-mono wrap-break-word font-stretch-50%">
           {address}
         </p>
@@ -49,7 +53,7 @@ const UserData = ({
             size: "lg",
             className: "w-full",
           })}>
-          Edit 📝
+          Edit <Edit2Icon />
         </Link>
       </CardFooter>
     </Card>
