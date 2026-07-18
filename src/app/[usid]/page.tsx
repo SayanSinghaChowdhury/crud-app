@@ -1,13 +1,31 @@
 import { Card, CardHeader, CardTitle } from "@/components/shadcnui/card";
 import EditorUser from "@/components/userdata/EditorUser";
+import prisma from "@/lib/database/dbClient";
+import Link from "next/link";
 
 type PageProps = {
   params: Promise<{
-    id: string;
+    usid: string;
   }>;
 };
 const page = async ({ params }: PageProps) => {
-  const { id } = await params;
+  const { usid } = await params;
+
+  const user = await prisma.userMosel.findUnique({ where: { id: usid } });
+
+  if (user === null) {
+    return (
+      <Link
+        href={"/create"}
+        className={`animate-drop-down grid h-dvh place-items-center delay-200`}>
+        <h1 className="animate-bounce font-sans text-2xl delay-300">
+          No users avalable
+          <span className="hover:text-5xl hover:duration-500">😭</span>
+        </h1>
+      </Link>
+    );
+  }
+
   return (
     <section className="grid h-dvh place-items-center">
       <Card className="grid w-sm place-items-center">
@@ -17,7 +35,7 @@ const page = async ({ params }: PageProps) => {
           </CardTitle>
         </CardHeader>
 
-        <EditorUser editDelete={id} />
+        <EditorUser editDelete={user} />
       </Card>
     </section>
   );

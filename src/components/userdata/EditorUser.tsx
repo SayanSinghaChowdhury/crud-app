@@ -2,8 +2,10 @@
 
 import { userSchema, UserSchemaType } from "@/lib/schemaUser";
 import userUpdateAction from "@/server/userEditingAction";
+import { UserMosel } from "@generated/prisma/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Send, UploadCloud } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { Button } from "../shadcnui/button";
@@ -18,10 +20,12 @@ import { Input } from "../shadcnui/input";
 import { Textarea } from "../shadcnui/textarea";
 
 type UserDataType = {
-  editDelete: string;
+  editDelete: UserMosel;
 };
 
-const EditorUser = ({ editDelete }: UserDataType) => {
+const EditorUser = ({
+  editDelete: { id, address, email, username },
+}: UserDataType) => {
   const {
     handleSubmit,
     control,
@@ -29,13 +33,15 @@ const EditorUser = ({ editDelete }: UserDataType) => {
     formState: { isSubmitting },
   } = useForm({
     resolver: zodResolver(userSchema),
-    defaultValues: { username: "", email: "", address: "" },
+    defaultValues: { username: username, email: email, address: address },
 
     mode: "all",
   });
 
-  const userEditHandelar = async (data: UserSchemaType) => {
-    const { issuccess, message } = await userUpdateAction(editDelete, data);
+  const { push } = useRouter();
+
+  const userEditHandelar = async (newData: UserSchemaType) => {
+    const { issuccess, message } = await userUpdateAction(id, newData);
 
     if (issuccess) {
       toast.success(message);
@@ -46,6 +52,8 @@ const EditorUser = ({ editDelete }: UserDataType) => {
     await new Promise((r) => {
       setTimeout(r, 1000);
     });
+
+    push("/");
   };
 
   return (
