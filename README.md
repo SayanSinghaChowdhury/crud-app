@@ -43,7 +43,7 @@ src/
 
 ----------------------------------------------------------
 Create a .env file:
-git clone https://github.com/your-username/basic-crud-app.git
+git clone https://github.com/SayanSinghaChowdhury/crud-app.git
 
 
 
