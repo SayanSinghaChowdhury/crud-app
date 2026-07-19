@@ -88,3 +88,16 @@ Visit the following URL in your browser:
 http://localhost:3000
 ```
 
+## 👨‍💻 Author
+
+**Sayan Singha Chowdhury**
+
+* GitHub: https://github.com/SayanSinghaChowdhury
+
+---
+
+## ⭐ Support
+
+If you found this project useful, consider giving it a **⭐ Star** on GitHub. Your support helps and is greatly appreciated!
+
+
