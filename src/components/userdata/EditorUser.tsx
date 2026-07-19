@@ -1,9 +1,11 @@
 "use client";
 
 import { userSchema, UserSchemaType } from "@/lib/schemaUser";
-import userCreateAction from "@/server/userCreateAction";
+import userUpdateAction from "@/server/userEditingAction";
+import { UserMosel } from "@generated/prisma/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Send, UploadCloud } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { Button } from "../shadcnui/button";
@@ -17,7 +19,11 @@ import {
 import { Input } from "../shadcnui/input";
 import { Textarea } from "../shadcnui/textarea";
 
-const EditorUser = () => {
+type UserDataType = {
+  editDelete: UserMosel;
+};
+
+const EditorUser = ({ editDelete: { id } }: UserDataType) => {
   const {
     handleSubmit,
     control,
@@ -30,17 +36,22 @@ const EditorUser = () => {
     mode: "all",
   });
 
-  const userEditHandelar = async (usData: UserSchemaType) => {
-    await new Promise((r) => {
-      setTimeout(r, 1000);
-    });
-    const { issuccess, message } = await userCreateAction(usData);
+  const { push } = useRouter();
+
+  const userEditHandelar = async (newData: UserSchemaType) => {
+    const { issuccess, message } = await userUpdateAction(id, newData);
 
     if (issuccess) {
       toast.success(message);
     } else {
       toast.error(message);
     }
+
+    await new Promise((r) => {
+      setTimeout(r, 1000);
+    });
+
+    push("/");
   };
 
   return (
@@ -56,6 +67,7 @@ const EditorUser = () => {
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor={field.name}>User Name</FieldLabel>
               <Input
+                className="bg-project text-project"
                 {...field}
                 id={field.name}
                 type="text"
@@ -68,6 +80,7 @@ const EditorUser = () => {
             </Field>
           )}
         />
+
         <Controller
           name="email"
           control={control}
@@ -76,6 +89,7 @@ const EditorUser = () => {
               <FieldLabel htmlFor={field.name}>User Email</FieldLabel>
               <Input
                 {...field}
+                className="bg-project text-project"
                 id={field.name}
                 type="email"
                 placeholder="Enter your Email"
@@ -95,7 +109,7 @@ const EditorUser = () => {
               <FieldLabel htmlFor={field.name}>User Adress</FieldLabel>
 
               <Textarea
-                className="pb-20"
+                className="bg-project text-project pb-20"
                 {...field}
                 id={field.name}
                 aria-invalid={fieldState.invalid}
@@ -113,23 +127,6 @@ const EditorUser = () => {
       </CardContent>
 
       <CardFooter className="grid place-items-center gap-3">
-        {/* <Button
-          type="reset"
-          onClick={HandleClear}
-          className="w-full"
-          variant={"destructive"}>
-          {clear ?
-            <>
-              Reseting...
-              <BrushCleaningIcon />
-            </>
-          : <>
-              Reset
-              <Trash2Icon />
-            </>
-          }
-        </Button> */}
-
         <Button
           type="submit"
           className="w-full"

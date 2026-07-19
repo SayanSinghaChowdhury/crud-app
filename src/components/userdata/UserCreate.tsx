@@ -75,6 +75,7 @@ const UserCreate = () => {
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor={field.name}>User Name</FieldLabel>
               <Input
+                className="bg-project text-project"
                 {...field}
                 id={field.name}
                 type="text"
@@ -94,6 +95,7 @@ const UserCreate = () => {
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor={field.name}>User Email</FieldLabel>
               <Input
+                className="text-project bg-project"
                 {...field}
                 id={field.name}
                 type="email"
@@ -114,7 +116,7 @@ const UserCreate = () => {
               <FieldLabel htmlFor={field.name}>User Adress</FieldLabel>
 
               <Textarea
-                className="pb-20"
+                className="bg-project text-project pb-20"
                 {...field}
                 id={field.name}
                 aria-invalid={fieldState.invalid}
