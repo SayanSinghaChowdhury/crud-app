@@ -12,7 +12,7 @@ type userDeleteProcess = {
 const DeleteUser = ({ usDelete }: userDeleteProcess) => {
   const [remove, setRemove] = useState(false);
 
-  const HandleClear = async ({}) => {
+  const HandleClear = async () => {
     const { issuccess, message } = await userDeleteAction(usDelete);
     setRemove(true);
 
