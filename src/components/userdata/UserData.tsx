@@ -61,9 +61,3 @@ const UserData = ({
 };
 
 export default UserData;
-
-// <Link
-//   className="w-full"
-//   variant={"secondary"}>
-//   Edit
-// </Link>;

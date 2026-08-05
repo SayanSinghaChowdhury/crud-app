@@ -12,7 +12,9 @@ type userDeleteProcess = {
 const DeleteUser = ({ usDelete }: userDeleteProcess) => {
   const [remove, setRemove] = useState(false);
 
-  const HandleClear = async ({}) => {
+  const HandleClear = async () => {
+    // server to client
+
     const { issuccess, message } = await userDeleteAction(usDelete);
     setRemove(true);
 
@@ -21,9 +23,6 @@ const DeleteUser = ({ usDelete }: userDeleteProcess) => {
     } else {
       toast.error(message);
     }
-
-    // server to client
-    await userDeleteAction(usDelete);
 
     await new Promise((r) => {
       setTimeout(r, 500);

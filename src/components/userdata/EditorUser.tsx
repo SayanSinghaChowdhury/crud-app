@@ -43,6 +43,8 @@ const EditorUser = ({ editDelete: { id } }: UserDataType) => {
 
     if (issuccess) {
       toast.success(message);
+
+      push("/");
     } else {
       toast.error(message);
     }
@@ -50,8 +52,6 @@ const EditorUser = ({ editDelete: { id } }: UserDataType) => {
     await new Promise((r) => {
       setTimeout(r, 1000);
     });
-
-    push("/");
   };
 
   return (

@@ -13,14 +13,15 @@ const page = async () => {
 
   if (userAll.length === 0) {
     return (
-      <Link
-        href={"/create"}
+      <section
         className={`animate-drop-down grid h-dvh place-items-center delay-200`}>
-        <h1 className="animate-bounce font-sans text-2xl delay-300">
+        <Link
+          href={"/create"}
+          className="animate-bounce font-sans text-2xl delay-300">
           No users avalable
           <span className="hover:text-5xl hover:duration-500">😭</span>
-        </h1>
-      </Link>
+        </Link>
+      </section>
     );
   }
 
